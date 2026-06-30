@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StaticImageData } from 'next/image';
-import { FaChevronLeft, FaChevronRight, FaQuoteLeft } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 
 import SteveJobs from '../public/Image/steve-jobs.jpg';
 import MahatmaGandhi from '../public/Image/gandhi.jpg';
@@ -70,6 +70,14 @@ const InspiringQuotes: React.FC = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Auto-play interval for quotes (cycles every 6 seconds)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev === 0 ? quotes.length - 1 : prev - 1));
   };
@@ -107,20 +115,24 @@ const InspiringQuotes: React.FC = () => {
         </div>
 
         {/* Quote Card */}
-        <div className='relative bg-white dark:bg-slate-900 rounded-2xl border border-gray-200/30 dark:border-slate-800/80 shadow-xl p-8 md:p-12 overflow-hidden'>
-          {/* Decorative gradient bar */}
-          <div className='absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500'></div>
+        <div className='relative bg-white dark:bg-slate-900 rounded-3xl border border-gray-200/50 dark:border-slate-800/80 shadow-xl p-8 md:p-12 overflow-hidden hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-emerald-500/5 hover:border-emerald-500/30 dark:hover:border-emerald-500/20 transition-all duration-500 group/card'>
+          {/* Decorative Shifting Gradient Bar */}
+          <div className='absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 group-hover/card:h-1.5 transition-all duration-300'></div>
 
-          {/* Quote icon */}
-          <FaQuoteLeft className='text-4xl text-emerald-500/20 dark:text-emerald-400/20 mb-6' />
+          {/* Background Floating Decorative Quotes */}
+          <FaQuoteLeft className='absolute top-4 left-6 text-7xl md:text-8xl text-emerald-500/5 dark:text-emerald-400/5 pointer-events-none z-0 animate-float-quote-left' />
+          <FaQuoteRight className='absolute bottom-6 right-8 text-7xl md:text-8xl text-cyan-500/5 dark:text-cyan-400/5 pointer-events-none z-0 animate-float-quote-right' />
+
+          {/* Quote icon foreground */}
+          <FaQuoteLeft className='relative text-4xl text-emerald-500/25 dark:text-emerald-400/25 mb-6 z-10' />
 
           {/* Slide content */}
           <div
             key={currentIndex}
-            className='flex flex-col items-center text-center animate-fadeIn'
+            className='relative flex flex-col items-center text-center animate-fadeIn z-10'
           >
-            <div className='relative mb-6'>
-              <div className='absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur opacity-30'></div>
+            <div className='relative mb-6 group/avatar cursor-pointer'>
+              <div className='absolute -inset-1.5 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur opacity-35 group-hover/avatar:opacity-60 group-hover/avatar:scale-105 transition-all duration-500'></div>
               <img
                 src={
                   typeof quote.image === 'string'
@@ -130,19 +142,19 @@ const InspiringQuotes: React.FC = () => {
                 alt={quote.author}
                 loading='lazy'
                 onError={(e) => (e.currentTarget.src = NoImageAvilable.src)}
-                className='relative w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-2 border-white dark:border-slate-800 shadow-lg'
+                className='relative w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-2 border-white dark:border-slate-800 shadow-lg group-hover/avatar:scale-102 transition-transform duration-500'
               />
             </div>
 
-            <p className='text-lg md:text-xl font-medium text-gray-700 dark:text-gray-200 leading-relaxed max-w-2xl italic'>
+            <p className='text-lg md:text-xl font-medium text-gray-700 dark:text-gray-200 leading-relaxed max-w-2xl italic px-4 md:px-8'>
               &ldquo;{quote.text}&rdquo;
             </p>
             <div className='mt-6 flex items-center gap-3'>
-              <div className='h-px w-8 bg-emerald-500'></div>
-              <p className='text-base font-bold text-gray-900 dark:text-white'>
+              <div className='h-0.5 w-8 bg-gradient-to-r from-transparent to-emerald-500'></div>
+              <p className='text-base font-bold text-gray-900 dark:text-white tracking-wide'>
                 {quote.author}
               </p>
-              <div className='h-px w-8 bg-emerald-500'></div>
+              <div className='h-0.5 w-8 bg-gradient-to-l from-transparent to-emerald-500'></div>
             </div>
           </div>
 
@@ -150,17 +162,25 @@ const InspiringQuotes: React.FC = () => {
           <button
             onClick={prevSlide}
             aria-label='Previous Quote'
-            className='absolute left-4 top-1/2 transform -translate-y-1/2 p-2.5 rounded-full bg-gray-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:text-emerald-500 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700 shadow transition-all duration-200'
+            className='absolute left-4 top-1/2 transform -translate-y-1/2 p-2.5 rounded-full bg-white dark:bg-slate-850 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 hover:border-emerald-500 text-gray-500 dark:text-gray-400 border border-gray-200/60 dark:border-slate-800 shadow-md hover:scale-110 z-25 transition-all duration-300'
           >
             <FaChevronLeft className='w-4 h-4' />
           </button>
           <button
             onClick={nextSlide}
             aria-label='Next Quote'
-            className='absolute right-4 top-1/2 transform -translate-y-1/2 p-2.5 rounded-full bg-gray-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:text-emerald-500 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700 shadow transition-all duration-200'
+            className='absolute right-4 top-1/2 transform -translate-y-1/2 p-2.5 rounded-full bg-white dark:bg-slate-850 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 hover:border-emerald-500 text-gray-500 dark:text-gray-400 border border-gray-200/60 dark:border-slate-800 shadow-md hover:scale-110 z-25 transition-all duration-300'
           >
             <FaChevronRight className='w-4 h-4' />
           </button>
+
+          {/* Linear Auto-play Progress Bar Indicator */}
+          <div className='absolute bottom-0 left-0 right-0 h-[3px] bg-gray-100/50 dark:bg-slate-850/40 overflow-hidden'>
+            <div
+              key={currentIndex}
+              className='h-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 animate-progress-bar'
+            />
+          </div>
         </div>
 
         {/* Dot Indicators */}

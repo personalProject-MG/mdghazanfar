@@ -75,7 +75,7 @@ const ContactSection = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder='Enter your name'
-              className='w-full p-3 rounded-xl border border-gray-200 dark:border-slate-850 bg-gray-50 dark:bg-slate-950/50 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-all text-sm'
+              className='w-full p-3 rounded-xl border border-gray-200 dark:border-slate-850 bg-gray-50 dark:bg-slate-950/50 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 focus:scale-[1.01] transition-all duration-300 text-sm'
               required
             />
           </div>
@@ -88,7 +88,7 @@ const ContactSection = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder='Enter your email address'
-              className='w-full p-3 rounded-xl border border-gray-200 dark:border-slate-850 bg-gray-50 dark:bg-slate-950/50 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-all text-sm'
+              className='w-full p-3 rounded-xl border border-gray-200 dark:border-slate-850 bg-gray-50 dark:bg-slate-950/50 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 focus:scale-[1.01] transition-all duration-300 text-sm'
               required
             />
           </div>
@@ -101,16 +101,17 @@ const ContactSection = () => {
               onChange={handleChange}
               placeholder='How can I help you?'
               rows={4}
-              className='w-full p-3 rounded-xl border border-gray-200 dark:border-slate-850 bg-gray-50 dark:bg-slate-950/50 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-all text-sm'
+              className='w-full p-3 rounded-xl border border-gray-200 dark:border-slate-850 bg-gray-50 dark:bg-slate-950/50 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 focus:scale-[1.01] transition-all duration-300 text-sm'
               required
             ></textarea>
           </div>
 
           <button
             type='submit'
-            className='w-full py-3 px-6 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-bold transition-all duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-sm'
+            disabled={status === 'Submitting...'}
+            className='w-full bg-emerald-500 hover:bg-emerald-600 disabled:bg-emerald-450 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-600/30 transition-all duration-300 transform active:scale-95 btn-shine-effect'
           >
-            Send Message
+            {status === 'Submitting...' ? 'Sending...' : 'Send Message'}
           </button>
         </form>
 

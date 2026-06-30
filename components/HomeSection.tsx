@@ -70,16 +70,16 @@ const HomeSection = () => (
 
       {/* Stats */}
       <div className='flex flex-wrap justify-center gap-6 mt-10'>
-        <div className='flex flex-col items-center px-6 py-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-slate-800/50 shadow-sm'>
-          <span className='text-2xl font-black bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent'>3+</span>
+        <div className='flex flex-col items-center px-6 py-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-slate-800/50 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/30 dark:hover:border-emerald-500/20 transition-all duration-300 cursor-default group'>
+          <span className='text-2xl font-black bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300'>3+</span>
           <span className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mt-0.5'>Years Experience</span>
         </div>
-        <div className='flex flex-col items-center px-6 py-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-slate-800/50 shadow-sm'>
-          <span className='text-2xl font-black bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent'>4</span>
+        <div className='flex flex-col items-center px-6 py-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-slate-800/50 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/30 dark:hover:border-emerald-500/20 transition-all duration-300 cursor-default group'>
+          <span className='text-2xl font-black bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300'>4</span>
           <span className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mt-0.5'>GCP Certifications</span>
         </div>
-        <div className='flex flex-col items-center px-6 py-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-slate-800/50 shadow-sm'>
-          <span className='text-2xl font-black bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent'>5+</span>
+        <div className='flex flex-col items-center px-6 py-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-slate-800/50 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/30 dark:hover:border-emerald-500/20 transition-all duration-300 cursor-default group'>
+          <span className='text-2xl font-black bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300'>5+</span>
           <span className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mt-0.5'>AI Projects</span>
         </div>
       </div>
@@ -89,13 +89,13 @@ const HomeSection = () => (
           href='/resume.pdf'
           target='_blank'
           rel='noopener noreferrer'
-          className='bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-emerald-500/25 hover:bg-emerald-600 hover:shadow-emerald-600/30 transition-all duration-300 transform hover:-translate-y-0.5'
+          className='bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-emerald-500/25 hover:bg-emerald-600 hover:shadow-emerald-600/30 transition-all duration-300 transform hover:-translate-y-0.5 btn-shine-effect'
         >
           Get Resume
         </a>
         <a
           href='#about'
-          className='border border-gray-300 dark:border-slate-700 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm text-gray-800 dark:text-gray-200 px-8 py-3.5 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-slate-800/80 transition-all duration-300 transform hover:-translate-y-0.5'
+          className='border border-gray-300 dark:border-slate-700 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm text-gray-800 dark:text-gray-200 px-8 py-3.5 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-slate-800/80 transition-all duration-300 transform hover:-translate-y-0.5 btn-shine-effect'
         >
           About Me
         </a>

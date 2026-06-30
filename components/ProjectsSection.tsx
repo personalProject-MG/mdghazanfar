@@ -156,6 +156,9 @@ const ProjectsSection = () => {
                 key={project.id}
                 className='group relative bg-white dark:bg-slate-950 rounded-2xl border border-gray-250/20 dark:border-slate-800/80 shadow-md hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.25)] dark:hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.15)] hover:-translate-y-2 hover:scale-[1.01] hover:border-emerald-500/30 dark:hover:border-emerald-500/20 transition-all duration-500 ease-out overflow-hidden flex flex-col justify-between'
               >
+                {/* Highlight bar */}
+                <div className='absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20'></div>
+
                 {/* Glow Accent */}
                 <div className='absolute top-0 right-0 w-36 h-36 bg-gradient-to-br from-emerald-500/5 to-cyan-500/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none' />
 
@@ -167,7 +170,7 @@ const ProjectsSection = () => {
                         {project.title}
                       </h3>
                     </div>
-                    <div className='p-3 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 rounded-xl flex-shrink-0 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-350'>
+                    <div className='p-3 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 rounded-xl flex-shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-all duration-350'>
                       <FaLaptopCode className='text-xl' />
                     </div>
                   </div>
@@ -185,7 +188,7 @@ const ProjectsSection = () => {
                     {project.technologies.map((tech, i) => (
                       <span
                         key={i}
-                        className='text-xs px-2.5 py-1 rounded-md bg-gray-50 dark:bg-slate-900 text-gray-600 dark:text-gray-400 border border-gray-155/15 dark:border-slate-800 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/30 hover:text-emerald-700 dark:hover:text-emerald-400 hover:border-emerald-300/30 dark:hover:border-emerald-800/40 transition-all duration-200 cursor-default'
+                        className='text-xs px-2.5 py-1 rounded-md bg-gray-50 dark:bg-slate-900 text-gray-600 dark:text-gray-400 border border-gray-155/15 dark:border-slate-800 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 hover:border-emerald-500 hover:-translate-y-0.5 transition-all duration-300 cursor-default shadow-sm hover:shadow-emerald-500/10'
                       >
                         {tech}
                       </span>
@@ -233,15 +236,15 @@ const ProjectsSection = () => {
                 {/* Expand Toggle Button */}
                 <button
                   onClick={() => toggleExpand(project.id)}
-                  className='w-full py-4 bg-gray-50 dark:bg-slate-900 hover:bg-gray-100 dark:hover:bg-slate-850 border-t border-gray-100 dark:border-slate-850 text-sm font-semibold text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-2 transition-colors duration-200 relative z-10'
+                  className='w-full py-4 bg-gray-50 dark:bg-slate-900 hover:bg-gray-100 dark:hover:bg-slate-850 border-t border-gray-100 dark:border-slate-850 text-sm font-semibold text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-2 transition-colors duration-200 relative z-10 group/btn'
                 >
                   {isExpanded ? (
                     <>
-                      Hide Details <FaChevronUp />
+                      Hide Details <FaChevronUp className='transition-transform duration-300 group-hover/btn:-translate-y-0.5' />
                     </>
                   ) : (
                     <>
-                      View Details & Impact <FaChevronDown />
+                      View Details & Impact <FaChevronDown className='transition-transform duration-300 group-hover/btn:translate-y-0.5' />
                     </>
                   )}
                 </button>
@@ -255,7 +258,7 @@ const ProjectsSection = () => {
           <div className='flex justify-center mt-12 relative z-10'>
             <button
               onClick={() => setShowAll((prev) => !prev)}
-              className='px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg hover:shadow-emerald-500/20 active:scale-95 cursor-pointer'
+              className='px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg hover:shadow-emerald-500/20 active:scale-95 cursor-pointer btn-shine-effect'
             >
               {showAll ? 'Show Less Projects' : 'View All Projects'}
             </button>

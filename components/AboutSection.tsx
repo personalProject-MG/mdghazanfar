@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import mga from '../public/Image/avatar.png';
+import mga from '../public/Image/MGA.jpeg';
 
 const AboutSection = () => (
   <section
@@ -26,12 +26,13 @@ const AboutSection = () => (
         {/* Profile Image Column */}
         <div className='lg:col-span-5 flex justify-center'>
           <div className='relative group'>
-            <div className='absolute -inset-1.5 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200'></div>
-            <div className='relative bg-white dark:bg-slate-900 p-3 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-xl'>
+            {/* Spinning Glow Ring */}
+            <div className='absolute -inset-1.5 bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 rounded-2xl blur opacity-35 group-hover:opacity-65 animate-spin-slow transition-opacity duration-500 pointer-events-none'></div>
+            <div className='relative bg-white dark:bg-slate-900 p-3 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-xl overflow-hidden'>
               <img
                 src={mga.src}
                 alt='Md Ghazanfar Alam'
-                className='w-72 h-72 sm:w-80 sm:h-80 rounded-xl object-cover'
+                className='w-72 h-72 sm:w-80 sm:h-80 rounded-xl object-cover group-hover:scale-103 transition-transform duration-500 ease-out'
               />
             </div>
           </div>
@@ -65,13 +66,13 @@ const AboutSection = () => (
 
           {/* Quick Info Grid */}
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-8 border-t border-gray-200/50 dark:border-slate-800/50'>
-            <div>
-              <p className='text-sm text-gray-500 dark:text-gray-450 uppercase tracking-wider font-semibold'>Education</p>
+            <div className='hover:translate-x-1.5 transition-transform duration-300 group/info'>
+              <p className='text-sm text-gray-500 dark:text-gray-450 uppercase tracking-wider font-semibold group-hover/info:text-emerald-500 transition-colors duration-200'>Education</p>
               <p className='font-medium mt-1 text-gray-800 dark:text-gray-200'>B.Tech in Computer Science & Engineering</p>
               <p className='text-sm text-gray-500 dark:text-gray-400'>Sister Nivedita University (2019-2023)</p>
             </div>
-            <div>
-              <p className='text-sm text-gray-500 dark:text-gray-450 uppercase tracking-wider font-semibold'>Location & Email</p>
+            <div className='hover:translate-x-1.5 transition-transform duration-300 group/info'>
+              <p className='text-sm text-gray-500 dark:text-gray-450 uppercase tracking-wider font-semibold group-hover/info:text-cyan-500 transition-colors duration-200'>Location & Email</p>
               <p className='font-medium mt-1 text-gray-800 dark:text-gray-200'>Hyderabad, India</p>
               <p className='text-sm text-gray-500 dark:text-gray-400'>ghazanfaralam642786@gmail.com</p>
             </div>

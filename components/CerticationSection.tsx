@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SiGooglecloud } from 'react-icons/si';
-import { FaCertificate, FaTrophy, FaAward, FaMicrosoft } from 'react-icons/fa';
+import { FaCertificate, FaTrophy, FaAward, FaMicrosoft, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const CerticationSection = () => {
   const certifications = [
@@ -47,7 +47,7 @@ const CerticationSection = () => {
       type: 'virtusa',
       icon: <FaCertificate className='text-amber-500 text-3xl' />,
       description: 'Internal certification verifying technical competencies in leveraging Large Language Models and AI engineering workflows within professional software development.',
-      verifyUrl: 'https://learn.microsoft.com/en-us/users/me/achievements#badges-section',
+      verifyUrl: 'https://learn.microsoft.com/en-us/users/mdghazanfar-3014/achievements',
     },
   ];
 
@@ -65,6 +65,9 @@ const CerticationSection = () => {
       icon: <FaAward className='text-teal-500 text-3xl' />,
     },
   ];
+
+  const [showAll, setShowAll] = useState(false);
+  const displayedCertifications = showAll ? certifications : certifications.slice(0, 3);
 
   return (
     <section
@@ -92,10 +95,11 @@ const CerticationSection = () => {
           </p>
         </div>        {/* Certifications Grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
-          {certifications.map((cert, index) => (
+          {displayedCertifications.map((cert, index) => (
             <div
               key={index}
-              className='group relative bg-white dark:bg-slate-900 p-6 rounded-2xl border border-gray-250/20 dark:border-slate-800/80 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(6,182,212,0.22)] dark:hover:shadow-[0_15px_35px_-10px_rgba(6,182,212,0.14)] hover:-translate-y-2 hover:scale-[1.02] hover:border-cyan-500/40 dark:hover:border-cyan-400/30 transition-all duration-500 ease-out flex flex-col justify-between overflow-hidden'
+              className={`${index >= 3 ? 'animate-fadeIn' : ''} group relative bg-white dark:bg-slate-900 p-6 rounded-2xl border border-gray-250/20 dark:border-slate-800/80 shadow-sm hover:shadow-[0_15px_35px_-10px_rgba(6,182,212,0.22)] dark:hover:shadow-[0_15px_35px_-10px_rgba(6,182,212,0.14)] hover:-translate-y-2 hover:scale-[1.02] hover:border-cyan-500/40 dark:hover:border-cyan-400/30 transition-all duration-500 ease-out flex flex-col justify-between overflow-hidden`}
+              style={index >= 3 ? { animationDelay: `${(index - 3) * 75}ms` } : undefined}
             >
               {/* Corner Glow Accent */}
               <div className='absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none' />
@@ -105,15 +109,16 @@ const CerticationSection = () => {
 
               <div>
                 <div className='flex items-center justify-between mb-4'>
-                  <span className='p-2 rounded-xl bg-gray-50 dark:bg-slate-800/50 border border-gray-100 dark:border-slate-800 group-hover:scale-110 group-hover:rotate-6 transition-all duration-350'>
+                  <span className='p-2 rounded-xl bg-gray-50 dark:bg-slate-800/50 border border-gray-100 dark:border-slate-800 group-hover:scale-110 group-hover:rotate-12 transition-all duration-350'>
                     {cert.icon}
                   </span>
                   <span className='text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border border-emerald-100/50 dark:border-emerald-900/30 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/40 transition-colors duration-300'>
                     {cert.issuer}
                   </span>
                 </div>
-                <h3 className='text-lg font-bold text-gray-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-450 transition-colors duration-300 mb-2'>
-                  {cert.title}
+                <h3 className='relative text-lg font-bold text-gray-900 dark:text-white group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors duration-300 mb-2 pb-2'>
+                  <span>{cert.title}</span>
+                  <span className='absolute bottom-0 left-0 w-0 h-[1.5px] bg-gradient-to-r from-emerald-500 to-cyan-500 group-hover:w-full transition-all duration-500' />
                 </h3>
                 <p className='text-sm text-gray-650 dark:text-gray-400 leading-relaxed mb-4'>
                   {cert.description}
@@ -124,7 +129,7 @@ const CerticationSection = () => {
                   href={cert.verifyUrl}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-50/50 dark:bg-cyan-950/20 border border-cyan-100/50 dark:border-cyan-900/30 rounded-xl hover:bg-cyan-100/80 dark:hover:bg-cyan-950/50 hover:text-cyan-700 dark:hover:text-cyan-300 transition-all duration-200 cursor-pointer'
+                  className='w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-50/50 dark:bg-cyan-950/20 border border-cyan-100/50 dark:border-cyan-900/30 rounded-xl hover:bg-cyan-500 hover:text-white dark:hover:bg-cyan-500 hover:border-cyan-500 transition-all duration-300 btn-shine-effect cursor-pointer'
                 >
                   Verify Badge
                 </a>
@@ -139,6 +144,21 @@ const CerticationSection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Toggle Button */}
+        <div className='flex justify-center mb-16'>
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className='group flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border border-cyan-500/20 bg-cyan-500/10 hover:bg-cyan-500 text-cyan-600 dark:text-cyan-400 hover:text-white hover:border-cyan-500 shadow-md hover:shadow-cyan-500/20 transition-all duration-300 btn-shine-effect'
+          >
+            <span>{showAll ? 'Show Less' : 'Show More Certifications'}</span>
+            {showAll ? (
+              <FaChevronUp className='w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5' />
+            ) : (
+              <FaChevronDown className='w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5' />
+            )}
+          </button>
         </div>
 
         {/* Digital Badge Profiles Sub-Section */}
@@ -181,7 +201,7 @@ const CerticationSection = () => {
 
             {/* Microsoft Learn Card */}
             <a
-              href='https://learn.microsoft.com/en-us/users/me/achievements#badges-section'
+              href='https://learn.microsoft.com/en-us/users/mdghazanfar-3014/achievements'
               target='_blank'
               rel='noopener noreferrer'
               className='group flex flex-col sm:flex-row items-center gap-5 p-6 bg-gray-50 dark:bg-slate-950/80 hover:bg-white dark:hover:bg-slate-950 rounded-2xl border border-gray-200/50 dark:border-slate-900 hover:border-blue-500/30 dark:hover:border-blue-500/20 hover:shadow-[0_10px_30px_-10px_rgba(59,130,246,0.15)] transition-all duration-300'

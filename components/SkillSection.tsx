@@ -153,8 +153,10 @@ const Skills = () => {
               {/* Corner Glow Accent */}
               <div className='absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none' />
 
-              <h3 className='text-lg font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-100 dark:border-slate-850 pb-2 flex items-center justify-between group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors duration-300'>
-                {category.title}
+              <h3 className='relative text-lg font-bold text-gray-900 dark:text-white mb-4 pb-2 flex items-center justify-between group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors duration-300'>
+                <span>{category.title}</span>
+                <span className='absolute bottom-0 left-0 w-full h-[1px] bg-gray-150 dark:bg-slate-850' />
+                <span className='absolute bottom-0 left-0 w-0 h-[1.5px] bg-gradient-to-r from-emerald-500 to-cyan-500 group-hover:w-full transition-all duration-500' />
               </h3>
               <ul className='space-y-3.5'>
                 {category.items.map((item, i) => (
@@ -177,7 +179,7 @@ const Skills = () => {
         <div className='flex justify-center mt-12'>
           <button
             onClick={() => setShowAll(!showAll)}
-            className='group flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border border-emerald-500/20 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-600 dark:text-emerald-400 hover:text-white hover:border-emerald-500 shadow-md hover:shadow-emerald-500/20 transition-all duration-300'
+            className='group flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border border-emerald-500/20 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-600 dark:text-emerald-400 hover:text-white hover:border-emerald-500 shadow-md hover:shadow-emerald-500/20 transition-all duration-300 btn-shine-effect'
           >
             <span>{showAll ? 'Show Less' : 'Show More Skills'}</span>
             {showAll ? (

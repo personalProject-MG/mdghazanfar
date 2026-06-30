@@ -74,13 +74,13 @@ const Footer: React.FC = () => {
 
           {/* Quick Nav */}
           <div>
-            <h3 className='text-xs font-bold uppercase tracking-widest text-gray-500 mb-3'>Navigation</h3>
+            <h3 className='text-xs font-bold uppercase tracking-widest text-gray-550 mb-3'>Navigation</h3>
             <ul className='space-y-2'>
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className='text-sm text-gray-400 hover:text-emerald-400 transition-colors duration-200'
+                    className='text-sm text-gray-400 hover:text-emerald-400 hover:translate-x-1 inline-block transition-all duration-300'
                   >
                     {link.label}
                   </Link>
@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
 
           {/* Social Links */}
           <div>
-            <h3 className='text-xs font-bold uppercase tracking-widest text-gray-500 mb-3'>Connect</h3>
+            <h3 className='text-xs font-bold uppercase tracking-widest text-gray-550 mb-3'>Connect</h3>
             <div className='flex gap-3'>
               {socialLinks.map((s) => (
                 <a
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
                   target='_blank'
                   rel='noopener noreferrer'
                   aria-label={s.label}
-                  className={`text-xl text-gray-400 ${s.hoverClass} transition-colors duration-200`}
+                  className={`flex items-center justify-center w-10 h-10 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-850 hover:border-slate-700 text-xl text-gray-400 ${s.hoverClass} hover:scale-110 hover:-rotate-6 hover:shadow-lg hover:shadow-emerald-500/5 transition-all duration-300`}
                 >
                   {s.icon}
                 </a>
@@ -117,10 +117,10 @@ const Footer: React.FC = () => {
           </p>
 
           {/* Tech stack */}
-          <div className='flex items-center gap-2 text-xs text-gray-600'>
+          <div className='flex items-center gap-2.5 text-xs text-gray-600'>
             <span>Crafted with ❤️ using</span>
             {techStack.map((t) => (
-              <span key={t.label} className='text-base' title={t.label}>
+              <span key={t.label} className='text-base hover:scale-125 hover:rotate-12 transition-transform duration-200 cursor-help' title={t.label}>
                 {t.icon}
               </span>
             ))}
