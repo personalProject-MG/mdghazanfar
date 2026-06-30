@@ -16,6 +16,7 @@ const SUGGESTED_QUESTIONS = [
 
 const ChatbotWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
@@ -40,6 +41,58 @@ const ChatbotWidget: React.FC = () => {
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   }, [isOpen]);
+
+  // Show notification popup on startup after delay
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hasSeen = sessionStorage.getItem('hasSeenChatbotNotification');
+      if (!hasSeen && !isOpen) {
+        const timer = setTimeout(() => {
+          setShowNotification(true);
+        }, 3000); // 3 seconds delay
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [isOpen]);
+
+  // Dismiss notification if chat opens
+  useEffect(() => {
+    if (isOpen) {
+      setShowNotification(false);
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('hasSeenChatbotNotification', 'true');
+      }
+    }
+  }, [isOpen]);
+
+  // Automatically close notification after 4 seconds
+  useEffect(() => {
+    if (showNotification) {
+      const timer = setTimeout(() => {
+        setShowNotification(false);
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('hasSeenChatbotNotification', 'true');
+        }
+      }, 4000); // 4 seconds visible duration
+      return () => clearTimeout(timer);
+    }
+  }, [showNotification]);
+
+  const handleCloseNotification = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowNotification(false);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('hasSeenChatbotNotification', 'true');
+    }
+  };
+
+  const handleNotificationClick = () => {
+    setIsOpen(true);
+    setShowNotification(false);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('hasSeenChatbotNotification', 'true');
+    }
+  };
 
   const sendMessage = async (text: string) => {
     const trimmed = text.trim();
@@ -214,6 +267,42 @@ const ChatbotWidget: React.FC = () => {
               </button>
             </form>
           </div>
+        </div>
+      )}
+
+      {/* Startup Notification Popup */}
+      {showNotification && !isOpen && (
+        <div
+          onClick={handleNotificationClick}
+          className='fixed bottom-[88px] right-5 sm:right-6 z-50 w-[280px] sm:w-[320px] p-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/50 dark:border-slate-700/50 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/30 dark:hover:border-emerald-500/30 hover:shadow-emerald-500/10 animate-fadeIn select-none group'
+        >
+          {/* Close button */}
+          <button
+            onClick={handleCloseNotification}
+            className='absolute top-2.5 right-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors'
+            aria-label='Close notification'
+          >
+            <FaTimes className='w-3 h-3' />
+          </button>
+
+          {/* Avatar and message */}
+          <div className='flex gap-3 pr-4'>
+            <div className='relative w-9 h-9 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/10'>
+              <FaRobot className='text-white text-base' />
+              <span className='absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full'></span>
+            </div>
+            <div className='flex-1 min-w-0'>
+              <p className='text-xs font-bold text-gray-900 dark:text-white mb-0.5'>
+                Ghazanfar&apos;s AI Assistant
+              </p>
+              <p className='text-xs text-gray-600 dark:text-gray-300 leading-normal'>
+                Hi! 👋 Ask me anything about Ghazanfar&apos;s skills, projects, or work experience!
+              </p>
+            </div>
+          </div>
+
+          {/* Pointer Tail */}
+          <div className='absolute bottom-[-7px] right-[20px] w-3.5 h-3.5 rotate-45 bg-white dark:bg-slate-900 border-r border-b border-gray-200/50 dark:border-slate-700/50 group-hover:border-emerald-500/30 transition-colors duration-300'></div>
         </div>
       )}
 
