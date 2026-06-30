@@ -143,7 +143,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
   if (!apiKey || apiKey === 'your_gemini_api_key_here') {
     return res.status(503).json({
       error: 'Chatbot is not yet configured. Please add a GEMINI_API_KEY to .env',

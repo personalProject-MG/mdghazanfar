@@ -14,22 +14,28 @@ const navLinks = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
 
   // Close on outside click
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setMenuOpen(false);
       }
     };
-    if (menuOpen) document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
   }, [menuOpen]);
 
   return (
-    <nav className='bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-gray-200/50 dark:border-slate-800/50 text-gray-900 dark:text-gray-100 sticky top-0 z-50 transition-colors duration-300'>
-      <div className='container mx-auto flex items-center justify-between p-4 max-w-7xl' ref={menuRef}>
+    <nav ref={menuRef} className='bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-gray-200/50 dark:border-slate-800/50 text-gray-900 dark:text-gray-100 sticky top-0 z-50 transition-colors duration-300'>
+      <div className='container mx-auto flex items-center justify-between p-4 max-w-7xl'>
         {/* Logo */}
         <Link href='#home' className='flex items-center gap-2.5 group cursor-pointer'>
           <img
