@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FaPython,
   FaReact,
@@ -9,6 +9,8 @@ import {
   FaTerminal,
   FaBrain,
   FaChartBar,
+  FaChevronDown,
+  FaChevronUp,
 } from 'react-icons/fa';
 import {
   SiTypescript,
@@ -113,6 +115,9 @@ const categories = [
 ];
 
 const Skills = () => {
+  const [showAll, setShowAll] = useState(false);
+  const displayedCategories = showAll ? categories : categories.slice(0, 3);
+
   return (
     <section
       id='skills'
@@ -120,6 +125,10 @@ const Skills = () => {
     >
       {/* Background Grid Pattern */}
       <div className='absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0'></div>
+
+      {/* Background Decorative Blobs */}
+      <div className='absolute top-1/3 left-1/4 w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-[70px] md:blur-[100px] pointer-events-none z-0 animate-glow-slow'></div>
+      <div className='absolute bottom-1/3 right-1/4 w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[70px] md:blur-[100px] pointer-events-none z-0 animate-float-reverse'></div>
 
       <div className='container mx-auto px-6 max-w-7xl relative z-10'>
         <div className='text-center max-w-2xl mx-auto mb-16'>
@@ -134,11 +143,12 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-          {categories.map((category, index) => (
+        <div className={`grid grid-cols-1 md:grid-cols-2 ${showAll ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-6 transition-all duration-500`}>
+          {displayedCategories.map((category, index) => (
             <div
               key={index}
-              className='group relative bg-white dark:bg-slate-950 p-6 rounded-2xl border border-gray-250/20 dark:border-slate-800/80 shadow-md hover:shadow-[0_15px_35px_-10px_rgba(16,185,129,0.18)] dark:hover:shadow-[0_15px_35px_-10px_rgba(16,185,129,0.12)] hover:-translate-y-2 hover:scale-[1.02] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 transition-all duration-500 ease-out'
+              className={`${index >= 3 ? 'animate-fadeIn' : ''} group relative bg-white dark:bg-slate-950 p-6 rounded-2xl border border-gray-250/20 dark:border-slate-800/80 shadow-md hover:shadow-[0_15px_35px_-10px_rgba(16,185,129,0.18)] dark:hover:shadow-[0_15px_35px_-10px_rgba(16,185,129,0.12)] hover:-translate-y-2 hover:scale-[1.02] hover:border-emerald-500/40 dark:hover:border-emerald-400/30 transition-all duration-500 ease-out`}
+              style={index >= 3 ? { animationDelay: `${(index - 3) * 75}ms` } : undefined}
             >
               {/* Corner Glow Accent */}
               <div className='absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none' />
@@ -161,6 +171,21 @@ const Skills = () => {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* Toggle Button */}
+        <div className='flex justify-center mt-12'>
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className='group flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border border-emerald-500/20 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-600 dark:text-emerald-400 hover:text-white hover:border-emerald-500 shadow-md hover:shadow-emerald-500/20 transition-all duration-300'
+          >
+            <span>{showAll ? 'Show Less' : 'Show More Skills'}</span>
+            {showAll ? (
+              <FaChevronUp className='w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5' />
+            ) : (
+              <FaChevronDown className='w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5' />
+            )}
+          </button>
         </div>
       </div>
     </section>

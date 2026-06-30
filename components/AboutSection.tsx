@@ -9,6 +9,10 @@ const AboutSection = () => (
     {/* Background Grid Pattern */}
     <div className='absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0'></div>
 
+    {/* Background Decorative Blobs */}
+    <div className='absolute top-10 left-10 w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-[70px] md:blur-[100px] pointer-events-none z-0 animate-float-slow'></div>
+    <div className='absolute bottom-10 right-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0 animate-glow-slow'></div>
+
     <Head>
       <title>About Me - Md Ghazanfar Alam</title>
       <meta

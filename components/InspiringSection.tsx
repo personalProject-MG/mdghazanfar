@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { StaticImageData } from 'next/image';
 import { FaChevronLeft, FaChevronRight, FaQuoteLeft } from 'react-icons/fa';
 
-import BillGate from '../public/Image/bill-gates.jpg';
 import SteveJobs from '../public/Image/steve-jobs.jpg';
 import MahatmaGandhi from '../public/Image/gandhi.jpg';
 import AlbertEinstein from '../public/Image/albertEinstein.jpg';
@@ -22,11 +21,6 @@ type Quote = {
 
 const InspiringQuotes: React.FC = () => {
   const quotes: Quote[] = [
-    {
-      text: "Success is a lousy teacher. It seduces smart people into thinking they can't lose.",
-      author: 'Bill Gates',
-      image: BillGate,
-    },
     {
       text: 'Your time is limited, so don\u2019t waste it living someone else\u2019s life.',
       author: 'Steve Jobs',
@@ -95,8 +89,8 @@ const InspiringQuotes: React.FC = () => {
       <div className='absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0'></div>
 
       {/* Decorative Blobs */}
-      <div className='absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[120px] pointer-events-none z-0 animate-glow-slow'></div>
-      <div className='absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none z-0 animate-float-slow'></div>
+      <div className='absolute top-1/3 left-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0 animate-glow-slow'></div>
+      <div className='absolute bottom-1/4 right-1/4 w-[220px] h-[220px] md:w-[350px] md:h-[350px] bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-[70px] md:blur-[100px] pointer-events-none z-0 animate-float-slow'></div>
 
       <div className='container mx-auto px-6 max-w-4xl relative z-10'>
         {/* Section Header */}
@@ -176,11 +170,10 @@ const InspiringQuotes: React.FC = () => {
               key={index}
               onClick={() => setCurrentIndex(index)}
               aria-label={`Go to quote ${index + 1}`}
-              className={`rounded-full transition-all duration-300 ${
-                currentIndex === index
+              className={`rounded-full transition-all duration-300 ${currentIndex === index
                   ? 'w-6 h-2.5 bg-emerald-500'
                   : 'w-2.5 h-2.5 bg-gray-300 dark:bg-slate-700 hover:bg-emerald-300 dark:hover:bg-emerald-800'
-              }`}
+                }`}
             />
           ))}
         </div>

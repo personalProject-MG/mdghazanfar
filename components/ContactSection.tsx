@@ -48,8 +48,9 @@ const ContactSection = () => {
       {/* Background Grid Pattern */}
       <div className='absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0'></div>
 
-      {/* Background Decorative Blob */}
-      <div className='absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none z-0 animate-glow-slow'></div>
+      {/* Background Decorative Blobs */}
+      <div className='absolute bottom-0 left-0 right-0 mx-auto w-[300px] h-[200px] md:w-[500px] md:h-[300px] bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-[70px] md:blur-[100px] pointer-events-none z-0 animate-glow-slow'></div>
+      <div className='absolute top-12 right-12 w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-[70px] md:blur-[100px] pointer-events-none z-0 animate-float-slow'></div>
 
       <div className='container mx-auto px-6 max-w-2xl relative z-10'>
         {/* Section Header */}

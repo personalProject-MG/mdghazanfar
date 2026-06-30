@@ -37,15 +37,12 @@ const Navbar = () => {
     <nav ref={menuRef} className='bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-gray-200/50 dark:border-slate-800/50 text-gray-900 dark:text-gray-100 sticky top-0 z-50 transition-colors duration-300'>
       <div className='container mx-auto flex items-center justify-between p-4 max-w-7xl'>
         {/* Logo */}
-        <Link href='#home' className='flex items-center gap-2.5 group cursor-pointer'>
+        <Link href='#home' className='flex items-center group cursor-pointer'>
           <img
             src='/Image/logo.png'
             alt='MGA Logo'
             className='w-10 h-10 rounded-xl object-cover border border-emerald-500/20 shadow-md shadow-emerald-550/10 group-hover:scale-105 group-hover:border-emerald-500/40 group-hover:shadow-emerald-500/20 transition-all duration-300'
           />
-          <span className='text-2xl font-black tracking-wider bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent group-hover:text-emerald-500 transition-colors duration-300'>
-            MGA
-          </span>
         </Link>
 
         {/* Desktop Nav */}

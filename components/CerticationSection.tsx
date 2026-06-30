@@ -74,6 +74,10 @@ const CerticationSection = () => {
       {/* Background Grid Pattern */}
       <div className='absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0'></div>
 
+      {/* Background Decorative Blobs */}
+      <div className='absolute top-1/4 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0 animate-float-slow'></div>
+      <div className='absolute bottom-1/4 left-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0 animate-glow-slow'></div>
+
       <div className='container mx-auto px-6 max-w-7xl relative z-10'>
         {/* Section Header */}
         <div className='text-center max-w-2xl mx-auto mb-16'>

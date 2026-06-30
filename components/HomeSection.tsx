@@ -25,9 +25,9 @@ const HomeSection = () => (
     <div className='absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none z-0'></div>
 
     {/* Background Decorative Blobs */}
-    <div className='absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/15 dark:bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none z-0 animate-glow-slow'></div>
-    <div className='absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-cyan-500/15 dark:bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-0 animate-float-slow'></div>
-    <div className='absolute top-1/3 right-1/3 w-[300px] h-[300px] bg-purple-500/10 dark:bg-indigo-500/5 rounded-full blur-[90px] pointer-events-none z-0 animate-float-reverse'></div>
+    <div className='absolute top-1/4 left-1/4 w-[280px] h-[280px] md:w-[500px] md:h-[500px] bg-emerald-500/15 dark:bg-emerald-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0 animate-glow-slow'></div>
+    <div className='absolute bottom-1/4 right-1/4 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-cyan-500/15 dark:bg-cyan-500/10 rounded-full blur-[90px] md:blur-[140px] pointer-events-none z-0 animate-float-slow'></div>
+    <div className='absolute top-1/3 right-1/3 w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-purple-500/10 dark:bg-indigo-500/5 rounded-full blur-[60px] md:blur-[90px] pointer-events-none z-0 animate-float-reverse'></div>
 
     {/* Decorative Floating Tech Graphics */}
     <div className='absolute left-12 top-1/4 opacity-25 dark:opacity-20 animate-float-slow pointer-events-none z-0 hidden lg:block text-slate-350 dark:text-slate-700'>
@@ -100,11 +100,48 @@ const HomeSection = () => (
           About Me
         </a>
       </div>
+
+      {/* Social Icons for Mobile */}
+      <div className='flex md:hidden justify-center mt-10'>
+        <ul className='flex gap-6 justify-center items-center bg-white/40 dark:bg-slate-900/40 backdrop-blur-md px-6 py-3 rounded-full border border-gray-200/50 dark:border-slate-800/50 shadow-md'>
+          <li>
+            <a
+              href='https://github.com/mdghazanfar'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-gray-500 hover:text-emerald-500 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors duration-200'
+              aria-label='GitHub'
+            >
+              <FontAwesomeIcon icon={faGithub} className='w-6 h-6' />
+            </a>
+          </li>
+          <li>
+            <a
+              href='https://www.linkedin.com/in/mdghazanfar/'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-gray-500 hover:text-emerald-500 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors duration-200'
+              aria-label='LinkedIn'
+            >
+              <FontAwesomeIcon icon={faLinkedin} className='w-6 h-6' />
+            </a>
+          </li>
+          <li>
+            <a
+              href='mailto:ghazanfaralam642786@gmail.com'
+              className='text-gray-500 hover:text-emerald-500 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors duration-200'
+              aria-label='Email'
+            >
+              <FontAwesomeIcon icon={faEnvelope} className='w-6 h-6' />
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    {/* Side Social Panel */}
-    <div className='absolute bottom-8 left-1/2 -translate-x-1/2 md:left-8 md:translate-x-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2 z-20'>
-      <ul className='flex md:flex-col gap-6 justify-center items-center bg-white/40 dark:bg-slate-900/40 backdrop-blur-md px-4 py-3 md:px-3 md:py-6 rounded-full border border-gray-200/50 dark:border-slate-800/50 shadow-md'>
+    {/* Side Social Panel (Desktop Only) */}
+    <div className='hidden md:block absolute left-8 top-1/2 -translate-y-1/2 z-20'>
+      <ul className='flex flex-col gap-6 justify-center items-center bg-white/40 dark:bg-slate-900/40 backdrop-blur-md px-3 py-6 rounded-full border border-gray-200/50 dark:border-slate-800/50 shadow-md'>
         <li>
           <a
             href='https://github.com/mdghazanfar'
