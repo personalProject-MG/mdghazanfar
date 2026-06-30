@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StaticImageData } from 'next/image';
+import { FaChevronLeft, FaChevronRight, FaQuoteLeft } from 'react-icons/fa';
 
 import BillGate from '../public/Image/bill-gates.jpg';
 import SteveJobs from '../public/Image/steve-jobs.jpg';
@@ -27,7 +28,7 @@ const InspiringQuotes: React.FC = () => {
       image: BillGate,
     },
     {
-      text: 'Your time is limited, so don’t waste it living someone else’s life.',
+      text: 'Your time is limited, so don\u2019t waste it living someone else\u2019s life.',
       author: 'Steve Jobs',
       image: SteveJobs,
     },
@@ -83,23 +84,49 @@ const InspiringQuotes: React.FC = () => {
     setCurrentIndex((prev) => (prev === quotes.length - 1 ? 0 : prev + 1));
   };
 
-  return (
-    <div className='min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col justify-center items-center px-4'>
-      <h2 className='text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-10'>
-        Inspiring Quotes
-      </h2>
+  const quote = quotes[currentIndex];
 
-      <div className='relative bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-7xl overflow-hidden'>
-        {/* Quotes */}
-        <div
-          className='flex transition-transform duration-700 ease-in-out'
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {quotes.map((quote, index) => (
-            <div
-              key={index}
-              className='flex flex-col items-center justify-center w-full flex-shrink-0 text-center'
-            >
+  return (
+    <section
+      id='quotes'
+      className='relative py-24 bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-hidden'
+    >
+      {/* Background Grid Pattern */}
+      <div className='absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none z-0'></div>
+
+      {/* Decorative Blobs */}
+      <div className='absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[120px] pointer-events-none z-0 animate-glow-slow'></div>
+      <div className='absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-cyan-500/10 dark:bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none z-0 animate-float-slow'></div>
+
+      <div className='container mx-auto px-6 max-w-4xl relative z-10'>
+        {/* Section Header */}
+        <div className='text-center max-w-2xl mx-auto mb-16'>
+          <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-400 border border-emerald-200/30 w-fit mb-4'>
+            <span>Inspiration</span>
+          </div>
+          <h2 className='text-3xl sm:text-5xl font-black tracking-tight'>
+            Inspiring Quotes
+          </h2>
+          <p className='mt-4 text-gray-600 dark:text-gray-400'>
+            Words that keep me grounded, motivated, and constantly growing.
+          </p>
+        </div>
+
+        {/* Quote Card */}
+        <div className='relative bg-white dark:bg-slate-900 rounded-2xl border border-gray-200/30 dark:border-slate-800/80 shadow-xl p-8 md:p-12 overflow-hidden'>
+          {/* Decorative gradient bar */}
+          <div className='absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500'></div>
+
+          {/* Quote icon */}
+          <FaQuoteLeft className='text-4xl text-emerald-500/20 dark:text-emerald-400/20 mb-6' />
+
+          {/* Slide content */}
+          <div
+            key={currentIndex}
+            className='flex flex-col items-center text-center animate-fadeIn'
+          >
+            <div className='relative mb-6'>
+              <div className='absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full blur opacity-30'></div>
               <img
                 src={
                   typeof quote.image === 'string'
@@ -108,50 +135,57 @@ const InspiringQuotes: React.FC = () => {
                 }
                 alt={quote.author}
                 loading='lazy'
-                onError={(e) => (e.currentTarget.src = NoImageAvilable.src)} // Fallback image
-                className='rounded-full border-4 border-gray-300 dark:border-gray-700 w-28 h-28 md:w-36 md:h-36 shadow-lg'
+                onError={(e) => (e.currentTarget.src = NoImageAvilable.src)}
+                className='relative w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-2 border-white dark:border-slate-800 shadow-lg'
               />
-              <p className='text-lg md:text-xl italic mt-6 px-4'>
-                "{quote.text}"
-              </p>
-              <p className='text-lg font-semibold mt-4'>— {quote.author}</p>
             </div>
-          ))}
+
+            <p className='text-lg md:text-xl font-medium text-gray-700 dark:text-gray-200 leading-relaxed max-w-2xl italic'>
+              &ldquo;{quote.text}&rdquo;
+            </p>
+            <div className='mt-6 flex items-center gap-3'>
+              <div className='h-px w-8 bg-emerald-500'></div>
+              <p className='text-base font-bold text-gray-900 dark:text-white'>
+                {quote.author}
+              </p>
+              <div className='h-px w-8 bg-emerald-500'></div>
+            </div>
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            aria-label='Previous Quote'
+            className='absolute left-4 top-1/2 transform -translate-y-1/2 p-2.5 rounded-full bg-gray-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:text-emerald-500 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700 shadow transition-all duration-200'
+          >
+            <FaChevronLeft className='w-4 h-4' />
+          </button>
+          <button
+            onClick={nextSlide}
+            aria-label='Next Quote'
+            className='absolute right-4 top-1/2 transform -translate-y-1/2 p-2.5 rounded-full bg-gray-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:text-emerald-500 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700 shadow transition-all duration-200'
+          >
+            <FaChevronRight className='w-4 h-4' />
+          </button>
         </div>
 
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevSlide}
-          aria-label='Previous Quote'
-          className='absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 p-3 rounded-full shadow-lg transition duration-200'
-        >
-          &lt;
-        </button>
-        <button
-          onClick={nextSlide}
-          aria-label='Next Quote'
-          className='absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 p-3 rounded-full shadow-lg transition duration-200'
-        >
-          &gt;
-        </button>
-
-        {/* Dots */}
-        <div className='flex justify-center mt-6 space-x-2'>
+        {/* Dot Indicators */}
+        <div className='flex justify-center mt-6 gap-2'>
           {quotes.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              aria-label={`Quote ${index + 1}`}
-              className={`w-4 h-4 rounded-full transition duration-200 ${
+              aria-label={`Go to quote ${index + 1}`}
+              className={`rounded-full transition-all duration-300 ${
                 currentIndex === index
-                  ? 'bg-gray-900 dark:bg-gray-100'
-                  : 'bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-500'
+                  ? 'w-6 h-2.5 bg-emerald-500'
+                  : 'w-2.5 h-2.5 bg-gray-300 dark:bg-slate-700 hover:bg-emerald-300 dark:hover:bg-emerald-800'
               }`}
             />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

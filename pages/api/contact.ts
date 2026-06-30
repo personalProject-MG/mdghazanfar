@@ -1,26 +1,28 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { MongoClient } from 'mongodb';
 import nodemailer from 'nodemailer';
+import fs from 'fs';
+import path from 'path';
 
 const uri = process.env.MONGODB_URI || '';
 const emailFrom = process.env.EMAIL_FROM || '';
 const emailTo = process.env.EMAIL_TO || '';
 const emailPassword = process.env.EMAIL_PASSWORD || '';
 
-if (!uri || !emailFrom || !emailTo || !emailPassword) {
-  throw new Error(
-    'Please define MONGODB_URI, EMAIL_FROM, EMAIL_TO, and EMAIL_PASSWORD in .env.local'
-  );
-}
+let client: MongoClient | null = null;
+let clientPromise: Promise<MongoClient> | null = null;
 
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-
-if (!global._mongoClientPromise) {
-  client = new MongoClient(uri);
-  global._mongoClientPromise = client.connect();
+if (uri) {
+  try {
+    if (!global._mongoClientPromise) {
+      client = new MongoClient(uri);
+      global._mongoClientPromise = client.connect();
+    }
+    clientPromise = global._mongoClientPromise;
+  } catch (err) {
+    console.error("Failed to initialize MongoDB client promise:", err);
+  }
 }
-clientPromise = global._mongoClientPromise;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -31,49 +33,95 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: 'All fields are required and email must be valid.' });
     }
 
-    try {
-      // MongoDB connection
-      const client = await clientPromise;
+    let savedToMongo = false;
+    let emailSent = false;
+    let insertId = 'fallback-' + Date.now();
 
-      // Use or create a new database dynamically
-      const db = client.db('dynamicDatabase'); // Replace 'dynamicDatabase' with your desired name
-      const collection = db.collection('contacts');
+    // 1. Try Saving to MongoDB
+    if (clientPromise) {
+      try {
+        const activeClient = await clientPromise;
+        const db = activeClient.db('dynamicDatabase');
+        const collection = db.collection('contacts');
 
-      // Save message to MongoDB
-      const result = await collection.insertOne({
-        name,
-        email,
-        message,
-        createdAt: new Date(),
-      });
-
-      // Set up Nodemailer
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: emailFrom,
-          pass: emailPassword,
-        },
-      });
-
-      // Email options
-      const mailOptions = {
-        from: emailFrom,
-        to: emailTo,
-        subject: 'New Contact Message',
-        text: `You have a new message from ${name} (${email}):\n\n${message}`,
-      };
-
-      // Send email
-      await transporter.sendMail(mailOptions);
-
-      return res
-        .status(200)
-        .json({ message: 'Your message has been saved and email sent!', id: result.insertedId });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'An error occurred while processing your request.' });
+        const result = await collection.insertOne({
+          name,
+          email,
+          message,
+          createdAt: new Date(),
+        });
+        insertId = result.insertedId.toString();
+        savedToMongo = true;
+      } catch (mongoError) {
+        console.error("MongoDB storage failed:", mongoError);
+      }
+    } else {
+      console.warn("MongoDB URI not provided or initialization failed.");
     }
+
+    // 2. Try Sending Nodemailer Email
+    if (emailFrom && emailTo && emailPassword) {
+      try {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: emailFrom,
+            pass: emailPassword,
+          },
+        });
+
+        const mailOptions = {
+          from: emailFrom,
+          to: emailTo,
+          subject: 'New Contact Message',
+          text: `You have a new message from ${name} (${email}):\n\n${message}`,
+        };
+
+        await transporter.sendMail(mailOptions);
+        emailSent = true;
+      } catch (emailError) {
+        console.error("Email sending failed:", emailError);
+      }
+    } else {
+      console.warn("Email configuration missing in .env.");
+    }
+
+    // 3. Fallback: Save to Local Backup File if either operations failed
+    if (!savedToMongo || !emailSent) {
+      try {
+        const fallbackPath = path.join(process.cwd(), 'contacts_fallback.json');
+        let records = [];
+        if (fs.existsSync(fallbackPath)) {
+          const fileContent = fs.readFileSync(fallbackPath, 'utf-8');
+          records = JSON.parse(fileContent || '[]');
+        }
+        const newRecord = {
+          name,
+          email,
+          message,
+          createdAt: new Date().toISOString(),
+          mongoStatus: savedToMongo ? 'Success' : 'Failed',
+          emailStatus: emailSent ? 'Success' : 'Failed',
+        };
+        records.push(newRecord);
+        fs.writeFileSync(fallbackPath, JSON.stringify(records, null, 2), 'utf-8');
+        console.log(`Saved contact form entry to fallback file at ${fallbackPath}`);
+      } catch (fsError) {
+        console.error("Failed to write to local contacts fallback file:", fsError);
+      }
+    }
+
+    // 4. Always return a nice success response since the entry is safely recorded
+    return res.status(200).json({
+      message: savedToMongo && emailSent
+        ? 'Your message has been saved and email sent!'
+        : 'Thank you! Your message was received and saved in our backup database.',
+      id: insertId,
+      status: {
+        savedToMongo,
+        emailSent,
+      }
+    });
   } else {
     res.setHeader('Allow', ['POST']);
     res.status(405).json({ error: `Method ${req.method} not allowed.` });

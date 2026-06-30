@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Tester",
+    "email": "tester@example.com",
+    "message": "Hello from test",
+    "createdAt": "2026-06-30T06:28:02.534Z",
+    "mongoStatus": "Failed",
+    "emailStatus": "Failed"
+  }
+]
