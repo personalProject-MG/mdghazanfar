@@ -73,7 +73,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const mailOptions = {
           from: emailFrom,
           to: emailTo,
-          subject: 'New Contact Message',
+          replyTo: email,
+          subject: `New Portfolio Message from ${name}`,
           text: `You have a new message from ${name} (${email}):\n\n${message}`,
         };
 
@@ -89,7 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // 3. Fallback: Save to Local Backup File if either operations failed
     if (!savedToMongo || !emailSent) {
       try {
-        const fallbackPath = path.join(process.cwd(), 'contacts_fallback.json');
+        const fallbackPath = path.join(process.cwd(), '.next', 'contacts_fallback.json');
         let records = [];
         if (fs.existsSync(fallbackPath)) {
           const fileContent = fs.readFileSync(fallbackPath, 'utf-8');
@@ -115,7 +116,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(200).json({
       message: savedToMongo && emailSent
         ? 'Your message has been saved and email sent!'
-        : 'Thank you! Your message was received and saved in our backup database.',
+        : 'Thank you! for your message',
       id: insertId,
       status: {
         savedToMongo,

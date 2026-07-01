@@ -38,28 +38,28 @@ Ghazanfar is an Associate Engineer specializing in Generative AI (Gen AI) and Ag
 === SKILLS ===
 
 Gen AI & Agentic AI Frameworks:
-  Google ADK, LangChain, LangGraph, LlamaIndex, CrewAI, Agno, LangFlow, Flowise
+  Google ADK, LangChain, LangGraph, CrewAI
 
 LLMs & Vector DBs:
   OpenAI, Google Gemini, HuggingFace Embeddings, FAISS, Pinecone
 
+Programming & Databases:
+  Python, TypeScript,JavaScript, MongoDB, SQL
+
 Cloud & Deployments:
-  Google Cloud Platform (GCP), Vertex AI, AWS Bedrock, AWS SageMaker
+  Google Cloud Platform (GCP), Vertex AI, Cloud Spanner
 
 AI Operations & Logging:
   AgentOps, Arize Phoenix, Logging & Observability, Metrics
 
-Programming & Databases:
-  Python, SQL, TypeScript, MongoDB, Cloud Spanner
-
 Frontend & UI Integration:
-  Streamlit, React, Flask, React Native
+  Next.js, React, Streamlit, Flask, React Native
 
 Data Processing & ML:
-  Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn
+  Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, TensorFlow, PyTorch
 
 Tools & DevOps:
-  Git, GitHub, JIRA, Confluence
+  Git, GitHub, JIRA, Confluence, Docker, Kubernetes, CI/CD
 
 === PROJECTS ===
 

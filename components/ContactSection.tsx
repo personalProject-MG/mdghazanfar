@@ -20,19 +20,63 @@ const ContactSection = () => {
 
     setStatus('Submitting...');
     try {
+      // 1. Save to MongoDB (and fallback local JSON)
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
+      let apiMessage = 'Something went wrong.';
+
       if (res.ok) {
-        await res.json();
+        const data = await res.json();
+        apiMessage = data.message;
+      }
+
+      // 2. Client-side Web3Forms submission to send email
+      const web3FormsKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+      let emailSent = false;
+
+      if (web3FormsKey) {
+        try {
+          const web3Res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+              access_key: web3FormsKey,
+              name: formData.name,
+              email: formData.email,
+              message: formData.message,
+              from_name: 'Portfolio Contact Form',
+              subject: `New Portfolio Message from ${formData.name}`,
+            }),
+          });
+
+          if (web3Res.ok) {
+            const web3Data = await web3Res.json();
+            if (web3Data.success) {
+              emailSent = true;
+            }
+          }
+        } catch (err) {
+          console.error('Web3Forms client-side email delivery failed:', err);
+        }
+      }
+
+      // 3. Set visual status to user
+      if (emailSent) {
         setStatus('Message sent successfully!');
         setFormData({ name: '', email: '', message: '' }); // Reset form
       } else {
-        const errorData = await res.json();
-        setStatus(errorData.error || 'Something went wrong.');
+        // If email failed, report the API message (which saves it locally or to mongo)
+        setStatus(apiMessage || 'Thank you! for your message');
+        if (res.ok) {
+          setFormData({ name: '', email: '', message: '' }); // Reset form anyway since it was saved to DB/fallback
+        }
       }
     } catch (error) {
       console.error(error);

@@ -6,5 +6,45 @@
     "createdAt": "2026-06-30T06:28:02.534Z",
     "mongoStatus": "Failed",
     "emailStatus": "Failed"
+  },
+  {
+    "name": "MGA",
+    "email": "md.ghazanfar01@gmail.com",
+    "message": "hello\n",
+    "createdAt": "2026-07-01T05:57:23.143Z",
+    "mongoStatus": "Failed",
+    "emailStatus": "Failed"
+  },
+  {
+    "name": "Test User",
+    "email": "er.mga001@gmail.com",
+    "message": "Hi, this is an automated test of the Web3Forms email setup! Please verify you received this.",
+    "createdAt": "2026-07-01T06:15:59.735Z",
+    "mongoStatus": "Failed",
+    "emailStatus": "Failed"
+  },
+  {
+    "name": "Test User",
+    "email": "er.mga001@gmail.com",
+    "message": "Hi, this is an automated test of the Web3Forms email setup! Please verify you received this.",
+    "createdAt": "2026-07-01T06:16:42.395Z",
+    "mongoStatus": "Failed",
+    "emailStatus": "Failed"
+  },
+  {
+    "name": "Test User",
+    "email": "er.mga001@gmail.com",
+    "message": "Hi, this is an automated test of the Web3Forms email setup! Please verify you received this.",
+    "createdAt": "2026-07-01T06:17:26.494Z",
+    "mongoStatus": "Failed",
+    "emailStatus": "Failed"
+  },
+  {
+    "name": "Test User",
+    "email": "er.mga001@gmail.com",
+    "message": "Hi, this is an automated test of the Web3Forms email setup! Please verify you received this.",
+    "createdAt": "2026-07-01T06:18:26.138Z",
+    "mongoStatus": "Failed",
+    "emailStatus": "Failed"
   }
 ]

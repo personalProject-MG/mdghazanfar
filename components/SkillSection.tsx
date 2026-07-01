@@ -18,6 +18,12 @@ import {
   SiMongodb,
   SiOpenai,
   SiStreamlit,
+  SiNextdotjs,
+  SiJavascript,
+  SiTensorflow,
+  SiPytorch,
+  SiDocker,
+  SiKubernetes,
 } from 'react-icons/si';
 
 // Icon mapping for each skill
@@ -25,7 +31,8 @@ const iconMap: Record<string, JSX.Element> = {
   // Programming & Databases
   'Python': <FaPython className="text-blue-500" />,
   'SQL': <FaDatabase className="text-amber-500" />,
-  'Typescript': <SiTypescript className="text-blue-600" />,
+  'TypeScript': <SiTypescript className="text-blue-600" />,
+  'JavaScript': <SiJavascript className="text-yellow-500" />,
   'MongoDB': <SiMongodb className="text-green-500" />,
   'Cloud Spanner': <FaDatabase className="text-cyan-500" />,
   
@@ -33,11 +40,7 @@ const iconMap: Record<string, JSX.Element> = {
   'Google ADK': <FaBrain className="text-red-500" />,
   'LangChain': <FaBrain className="text-emerald-500" />,
   'LangGraph': <FaBrain className="text-indigo-500" />,
-  'LlamaIndex': <FaBrain className="text-purple-500" />,
   'CrewAI': <FaBrain className="text-pink-500" />,
-  'Agno': <FaBrain className="text-rose-500" />,
-  'LangFlow': <FaBrain className="text-teal-500" />,
-  'Flowise': <FaBrain className="text-cyan-500" />,
 
   // LLMs & RAG Pipelines
   'OpenAI': <SiOpenai className="text-gray-900 dark:text-gray-100" />,
@@ -49,8 +52,6 @@ const iconMap: Record<string, JSX.Element> = {
   // Cloud & Deployment
   'Google Cloud Platform (GCP)': <SiGooglecloud className="text-blue-500" />,
   'Vertex AI': <SiGooglecloud className="text-indigo-500" />,
-  'Bedrock': <FaCloud className="text-orange-500" />,
-  'SageMaker': <FaCloud className="text-orange-600" />,
 
   // AI Operations
   'AgentOps': <FaServer className="text-indigo-400" />,
@@ -61,6 +62,7 @@ const iconMap: Record<string, JSX.Element> = {
   // Frontend & UI
   'Streamlit': <SiStreamlit className="text-red-500" />,
   'React': <FaReact className="text-cyan-400" />,
+  'Next.js': <SiNextdotjs className="text-black dark:text-white" />,
   'Flask': <FaServer className="text-gray-700 dark:text-gray-300" />,
   'React Native': <FaReact className="text-indigo-400" />,
 
@@ -70,19 +72,24 @@ const iconMap: Record<string, JSX.Element> = {
   'Scikit-learn': <FaChartBar className="text-orange-400" />,
   'Matplotlib': <FaChartBar className="text-green-600" />,
   'Seaborn': <FaChartBar className="text-teal-600" />,
+  'TensorFlow': <SiTensorflow className="text-orange-500" />,
+  'PyTorch': <SiPytorch className="text-red-500" />,
 
   // Version Control & DevTools
   'Git': <FaGit className="text-orange-500" />,
   'GitHub': <FaGit className="text-gray-900 dark:text-gray-100" />,
   'JIRA': <FaTerminal className="text-blue-500" />,
   'Confluence': <FaTerminal className="text-blue-400" />,
+  'Docker': <SiDocker className="text-blue-500" />,
+  'Kubernetes': <SiKubernetes className="text-blue-600" />,
+  'CI/CD': <FaServer className="text-emerald-500" />,
 };
 
 // Skill categories
 const categories = [
   {
     title: 'Gen AI & Agentic AI Frameworks',
-    items: ['Google ADK', 'LangChain', 'LangGraph', 'LlamaIndex', 'CrewAI', 'Agno', 'LangFlow', 'Flowise'],
+    items: ['Google ADK', 'LangChain', 'LangGraph', 'CrewAI'],
   },
   {
     title: 'LLMs & Vector DBs',
@@ -90,7 +97,7 @@ const categories = [
   },
   {
     title: 'Cloud & Deployments',
-    items: ['Google Cloud Platform (GCP)', 'Vertex AI', 'Bedrock', 'SageMaker'],
+    items: ['Google Cloud Platform (GCP)', 'Vertex AI', 'Cloud Spanner'],
   },
   {
     title: 'AI Operations & Logging',
@@ -98,19 +105,19 @@ const categories = [
   },
   {
     title: 'Programming & Databases',
-    items: ['Python', 'SQL', 'Typescript', 'MongoDB', 'Cloud Spanner'],
+    items: ['Python', 'TypeScript', 'JavaScript', 'MongoDB', 'SQL'],
   },
   {
     title: 'Frontend & UI Integration',
-    items: ['Streamlit', 'React', 'Flask', 'React Native'],
+    items: ['Next.js', 'React', 'Streamlit', 'Flask', 'React Native'],
   },
   {
     title: 'Data Processing & ML',
-    items: ['Pandas', 'NumPy', 'Scikit-learn', 'Matplotlib', 'Seaborn'],
+    items: ['Pandas', 'NumPy', 'Scikit-learn', 'Matplotlib', 'Seaborn', 'TensorFlow', 'PyTorch'],
   },
   {
     title: 'Tools & DevOps',
-    items: ['Git', 'GitHub', 'JIRA', 'Confluence'],
+    items: ['Git', 'GitHub', 'JIRA', 'Confluence', 'Docker', 'Kubernetes', 'CI/CD'],
   },
 ];
 
