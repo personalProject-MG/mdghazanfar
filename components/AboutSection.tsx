@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import mga from '../public/Image/MGA.jpeg';
+import mga from '../public/Image/105430.png';
 
 const AboutSection = () => (
   <section

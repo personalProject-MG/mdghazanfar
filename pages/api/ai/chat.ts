@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const PROFILE_CONTEXT = `
+export const PROFILE_CONTEXT = `
 You are an AI assistant embedded in Md Ghazanfar Alam's personal portfolio website.
 Your ONLY job is to answer questions about Ghazanfar's profile, experience, skills, projects, and background.
 Be concise, friendly, and professional. If asked something unrelated to the profile, politely redirect.
@@ -157,11 +157,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-3.5-flash',
-      systemInstruction: PROFILE_CONTEXT,
-    });
-
+    
     // Build Gemini conversation history (all messages except the last user one)
     // Gemini requires history to start with 'user' role — drop any leading assistant messages
     const rawHistory = messages.slice(0, -1).map((m) => ({
@@ -170,11 +166,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }));
     const firstUserIdx = rawHistory.findIndex((m) => m.role === 'user');
     const history = firstUserIdx >= 0 ? rawHistory.slice(firstUserIdx) : [];
-
-    const chat = model.startChat({ history });
     const lastMessage = messages[messages.length - 1].content;
-    const result = await chat.sendMessage(lastMessage);
-    const text = result.response.text();
+    
+    let text = '';
+    try {
+      const model = genAI.getGenerativeModel({
+        model: 'gemini-3.5-flash',
+        systemInstruction: PROFILE_CONTEXT,
+      });
+      const chat = model.startChat({ history });
+      const result = await chat.sendMessage(lastMessage);
+      text = result.response.text();
+    } catch (err: any) {
+      console.warn('Chat primary model gemini-3.5-flash failed, trying gemini-3.1-flash-lite fallback:', err.message || err);
+      const model = genAI.getGenerativeModel({
+        model: 'gemini-3.1-flash-lite',
+        systemInstruction: PROFILE_CONTEXT,
+      });
+      const chat = model.startChat({ history });
+      const result = await chat.sendMessage(lastMessage);
+      text = result.response.text();
+    }
 
     return res.status(200).json({ reply: text });
   } catch (err: unknown) {

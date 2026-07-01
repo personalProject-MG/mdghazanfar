@@ -7,6 +7,7 @@ const navLinks = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
   { href: '#skills', label: 'Skills' },
+  { href: '#agent-sandbox', label: 'Agent Sandbox' },
   { href: '#certifications', label: 'Certifications' },
   { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },

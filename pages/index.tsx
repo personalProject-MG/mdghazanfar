@@ -5,6 +5,7 @@ import MainLayout from '../layouts/MainLayout';
 import HomeSection from '../components/HomeSection';
 import AboutSection from '../components/AboutSection';
 import ProjectsSection from '../components/ProjectsSection';
+import AgentSection from '../components/AgentSection';
 import ContactSection from '../components/ContactSection';
 import InspiringQuotes from '../components/InspiringSection';
 import Skills from '../components/SkillSection';
@@ -29,6 +30,7 @@ const Home = () => {
           <Skills />
           <CertificateViewer />
           <ProjectsSection />
+          <AgentSection />
           <InspiringQuotes />
           <ContactSection />
           <Footer />
