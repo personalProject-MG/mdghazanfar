@@ -32,7 +32,7 @@ const AboutSection = () => (
               <img
                 src={mga.src}
                 alt='Md Ghazanfar Alam'
-                className='w-72 h-72 sm:w-80 sm:h-80 rounded-xl object-cover group-hover:scale-103 transition-transform duration-500 ease-out'
+                className='w-72 h-auto sm:w-80 rounded-xl group-hover:scale-103 transition-transform duration-500 ease-out'
               />
             </div>
           </div>
@@ -48,7 +48,8 @@ const AboutSection = () => (
           </h2>
           <div className='space-y-6 text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed'>
             <p>
-              Hello! I am an <span className='text-emerald-500 font-semibold'>Associate Engineer in Emerging Technologies</span> with{' '}
+              Hello! I am an <span className='text-emerald-500 font-semibold'>Associate Engineer in Emerging Technologies</span> at{' '}
+              <span className='text-emerald-500 font-semibold'>Virtusa Corporation, Hyderabad</span>, with{' '}
               <span className='font-semibold dark:text-gray-100'>3+ years of experience</span> specializing in{' '}
               <span className='font-semibold dark:text-gray-100'>Generative AI (Gen AI)</span> and{' '}
               <span className='font-semibold dark:text-gray-100'>Agentic AI</span>, with strong expertise in cloud-based AI deployments, LLM frameworks, and AI workflow orchestration.
@@ -65,14 +66,19 @@ const AboutSection = () => (
           </div>
 
           {/* Quick Info Grid */}
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-8 border-t border-gray-200/50 dark:border-slate-800/50'>
+          <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-8 border-t border-gray-200/50 dark:border-slate-800/50'>
             <div className='hover:translate-x-1.5 transition-transform duration-300 group/info'>
-              <p className='text-sm text-gray-500 dark:text-gray-450 uppercase tracking-wider font-semibold group-hover/info:text-emerald-500 transition-colors duration-200'>Education</p>
+              <p className='text-sm text-gray-500 dark:text-gray-450 uppercase tracking-wider font-semibold group-hover/info:text-emerald-500 transition-colors duration-200'>Current Role</p>
+              <p className='font-medium mt-1 text-gray-800 dark:text-gray-200'>Associate Engineer</p>
+              <p className='text-sm text-gray-500 dark:text-gray-400'>Virtusa Corporation (Hyderabad)</p>
+            </div>
+            <div className='hover:translate-x-1.5 transition-transform duration-300 group/info'>
+              <p className='text-sm text-gray-500 dark:text-gray-450 uppercase tracking-wider font-semibold group-hover/info:text-cyan-500 transition-colors duration-200'>Education</p>
               <p className='font-medium mt-1 text-gray-800 dark:text-gray-200'>B.Tech in Computer Science & Engineering</p>
               <p className='text-sm text-gray-500 dark:text-gray-400'>Sister Nivedita University (2019-2023)</p>
             </div>
             <div className='hover:translate-x-1.5 transition-transform duration-300 group/info'>
-              <p className='text-sm text-gray-500 dark:text-gray-450 uppercase tracking-wider font-semibold group-hover/info:text-cyan-500 transition-colors duration-200'>Location & Email</p>
+              <p className='text-sm text-gray-500 dark:text-gray-450 uppercase tracking-wider font-semibold group-hover/info:text-emerald-500 transition-colors duration-200'>Location & Email</p>
               <p className='font-medium mt-1 text-gray-800 dark:text-gray-200'>Hyderabad, India</p>
               <p className='text-sm text-gray-500 dark:text-gray-400'>ghazanfaralam642786@gmail.com</p>
             </div>
