@@ -26,31 +26,32 @@ Ghazanfar is an Associate Engineer specializing in Generative AI (Gen AI) and Ag
 
 === CERTIFICATIONS ===
 1. Google Cloud Professional Machine Learning Engineer – Active
-2. Google Cloud Associate Cloud Engineer – Active
-3. Google Cloud Digital Leader – Active
-4. Google Cloud Generative AI Leader – Active
-5. Virtusa Certified Gen AI Assisted Engineer – 2025
+2. Google Cloud Professional Data Engineer – Active
+3. Google Cloud Associate Cloud Engineer – Active
+4. Google Cloud Digital Leader – Active
+5. Google Cloud Generative AI Leader – Active
+6. Virtusa Certified Gen AI Assisted Engineer – 2025
 
 === ACHIEVEMENTS ===
 - Virtusa Jatayu Hackathon Season 2 – Runner-Up (prestigious internal hackathon for AI-driven tools)
-- 4 Google Cloud Professional Certifications validating deep mastery of cloud-native systems and ML architectures
+- 5 Google Cloud Certifications validating deep mastery of cloud-native systems, ML/Data architectures, and digital scaling
 
 === SKILLS ===
 
 Gen AI & Agentic AI Frameworks:
-  Google ADK, LangChain, LangGraph, CrewAI
+  Google ADK, LangChain, LangGraph, CrewAI, LlamaIndex, Agno, LangFlow, Flowise
 
 LLMs & Vector DBs:
   OpenAI, Google Gemini, HuggingFace Embeddings, FAISS, Pinecone
 
 Programming & Databases:
-  Python, TypeScript,JavaScript, MongoDB, SQL
+  Python, TypeScript, JavaScript, MongoDB, SQL
 
 Cloud & Deployments:
   Google Cloud Platform (GCP), Vertex AI, Cloud Spanner
 
-AI Operations & Logging:
-  AgentOps, Arize Phoenix, Logging & Observability, Metrics
+AI Operations, Logging & Evaluation:
+  AgentOps, Arize Phoenix, Logging & Observability, Metrics, OpenEval, DeepEval
 
 Frontend & UI Integration:
   Next.js, React, Streamlit, Flask, React Native

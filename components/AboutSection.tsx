@@ -57,6 +57,7 @@ const AboutSection = () => (
             <p>
               I hold multiple premium industry credentials, including the{' '}
               <span className='text-cyan-500 font-semibold'>Google Cloud Professional Machine Learning Engineer</span>,{' '}
+              <span className='text-cyan-500 font-semibold'>Professional Data Engineer</span>,{' '}
               <span className='text-cyan-500 font-semibold'>Associate Cloud Engineer</span>, and{' '}
               <span className='text-cyan-500 font-semibold'>Cloud Digital Leader</span> certifications. I completed the Gen AI GCP L300 & L400 courses, alongside 17+ weeks of intensive hands-on training in building production-ready multi-agent systems and RAG pipelines.
             </p>

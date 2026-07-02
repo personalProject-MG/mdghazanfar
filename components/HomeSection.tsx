@@ -146,7 +146,7 @@ const HomeSection = () => {
             <span className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mt-0.5'>Years Experience</span>
           </div>
           <div className='flex flex-col items-center px-6 py-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-slate-800/50 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/30 dark:hover:border-emerald-500/20 transition-all duration-300 cursor-default group'>
-            <span className='text-2xl font-black bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300'>4</span>
+            <span className='text-2xl font-black bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300'>5</span>
             <span className='text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mt-0.5'>GCP Certifications</span>
           </div>
           <div className='flex flex-col items-center px-6 py-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-slate-800/50 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-emerald-500/30 dark:hover:border-emerald-500/20 transition-all duration-300 cursor-default group'>

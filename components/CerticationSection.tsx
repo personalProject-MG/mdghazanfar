@@ -14,6 +14,15 @@ const CerticationSection = () => {
       verifyUrl: 'https://www.credly.com/badges/184c3176-a511-4caf-8792-f1a8200ac9f5',
     },
     {
+      title: 'Google Cloud Professional Data Engineer',
+      issuer: 'Google Cloud',
+      date: 'Active',
+      type: 'gcp',
+      icon: <SiGooglecloud className='text-blue-600 text-3xl' />,
+      description: 'Validation of expertise in designing, building, operationalizing, securing, and monitoring data processing systems on Google Cloud Platform.',
+      verifyUrl: 'https://www.credly.com/users/md-ghazanfar-alam',
+    },
+    {
       title: 'Google Cloud Associate Cloud Engineer',
       issuer: 'Google Cloud',
       date: 'Active',
@@ -61,7 +70,7 @@ const CerticationSection = () => {
     {
       title: 'Multiple Professional GCP Certifications',
       issuer: 'Industry Recognition',
-      detail: 'Successfully attained 4 Google Cloud credentials validating deep technical mastery of cloud-native systems, ML architectures, and digital scaling.',
+      detail: 'Successfully attained 5 Google Cloud credentials validating deep technical mastery of cloud-native systems, ML architectures, and digital scaling.',
       icon: <FaAward className='text-teal-500 text-3xl' />,
     },
   ];
