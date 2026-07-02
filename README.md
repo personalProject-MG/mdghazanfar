@@ -1,28 +1,46 @@
-# Md Ghazanfar Alam — Professional AI Portfolio
+# Md Ghazanfar Alam — Professional AI & Full-Stack Portfolio
 
-Welcome to the official professional portfolio website of **Md Ghazanfar Alam**, a specialist in Generative AI, Agentic AI, and Cloud Machine Learning. This project is built as a high-fidelity, fully responsive Next.js application designed to showcase technical skills, professional certifications, production-grade projects, and live-verified credentials.
+Welcome to the official, premium portfolio website of **Md Ghazanfar Alam**, a specialist in Generative AI, Agentic AI, and Cloud Machine Learning. 
+
+This project is built as a high-fidelity, responsive, dark-mode-first Next.js application that showcases technical skills, professional certifications, production-grade projects, and live-verified credentials. It also features interactive AI sandboxes and customization tools that leverage Google's Gemini LLMs.
 
 ---
 
 ## 🚀 Key Features
 
-*   **Custom AI Chatbot Widget**: A floating chat widget powered by Google's **Gemini API** that behaves as an autonomous profile assistant. It handles visitor queries about Ghazanfar's experience, certifications, and projects using a specialized profile-context system prompt.
-*   **Creative Premium Animations**: Custom-designed, interactive card components in the Skills, Certifications, and Projects sections featuring perspective hover transforms, matching border color glows, and micro-animated icons.
-*   **Verified Credentials Panel**: A dedicated **Digital Badge Profiles** sub-section linking directly to verified public credentials on **Credly** (for Google Cloud certifications) and **Microsoft Learn**.
-*   **Dynamic Splash Loader**: An interactive, full-screen entry loader featuring custom gradient rings, initials branding, and a smooth fade-out animation.
-*   **Expandable Projects Grid**: Optimizes initial load speeds by rendering the top 2 featured projects by default with a "View All Projects" accordion toggle to load more dynamically.
-*   **Contact Form Integration**: Fully wired contact section connected to a custom backend endpoint for secure message transmission.
+*   **🤖 Floating AI Chatbot Widget (`ChatbotWidget.tsx`)**:
+    *   Powered by Google's **Gemini API** (with a failover strategy to `gemini-3.1-flash-lite` if `gemini-3.5-flash` encounters limits).
+    *   Features a specialized profile-context system prompt allowing it to act as an autonomous profile assistant.
+    *   Accepts queries about experience, certifications, and skills, returning rich Markdown-formatted answers.
+*   **⚡ Server-Sent Events (SSE) Agentic Sandbox (`AgentSection.tsx`)**:
+    *   A live trace visualization of a multi-agent orchestration pipeline.
+    *   Simulates coordination between **Planner**, **Searcher**, **Editor**, **Critic**, and **Publisher** agents.
+    *   Outputs console logs and loops back to draft revised content before rendering a final compiled HTML report.
+*   **🛠️ AI Resume Tailor & PDF Generator (`HomeSection.tsx`)**:
+    *   Allows visitors to paste any job description.
+    *   Calls Vertex AI / Gemini API to perform a semantic alignment analysis mapping Ghazanfar's master profile to the role.
+    *   Compiles a customized preview highlighting matched skills, tailored summary, and customized project descriptions.
+    *   Generates and downloads a custom, clean PDF document on the fly using `pdfkit`.
+*   **💡 Dynamic Quote Generator (`InspiringSection.tsx`)**:
+    *   Fetches real-time AI thoughts and tech wisdom dynamically using Gemini.
+    *   Falls back onto classic curated wisdom from tech and history giants presented via a carousel.
+*   **🌓 Seamless Dark & Light Mode (`ThemeSwitcher.tsx`)**:
+    *   Uses `next-themes` and Tailwind CSS to switch layouts on the fly with a micro-animated toggle button.
+*   **🎨 High-End Premium Styling & Transitions**:
+    *   Features perspective card transformations, glowing emerald-to-cyan hover borders, backdrop-blur (glassmorphism) filters, dynamic background grid overlays, and a custom full-screen entry Loader.
 
 ---
 
 ## 🛠️ Tech Stack
 
-*   **Framework**: Next.js & React
+*   **Framework**: Next.js 16 (Pages Router)
 *   **Language**: TypeScript
-*   **Styling**: Tailwind CSS & Vanilla CSS (custom animations)
+*   **Styling**: Tailwind CSS & Vanilla CSS (with customized keyframe animations)
+*   **AI Integration**: `@google/generative-ai` & `react-markdown`
+*   **PDF Engine**: `pdfkit` & `@types/pdfkit`
 *   **Icons & Branding**: FontAwesome, React Icons
-*   **AI Integration**: `@google/generative-ai` & `react-markdown` (for rich text formatting inside the chatbot)
-*   **Deployment & Performance**: Fully optimized static pages with server-rendered API routes
+*   **Theme Management**: `next-themes`
+*   **Deployment**: Fully static and serverless API routes on Node.js
 
 ---
 
@@ -32,12 +50,13 @@ Welcome to the official professional portfolio website of **Md Ghazanfar Alam**,
 Ensure you have Node.js (version 18+) installed on your machine.
 
 ### 2. Environment Configuration
-Create a `.env` file in the root directory and configure the Gemini API key:
+Create a `.env` file in the root directory and configure your Gemini API key:
 ```env
 GEMINI_API_KEY=your_google_ai_studio_api_key
 ```
+
 > [!IMPORTANT]
-> A valid key from **Google AI Studio** is required for the chatbot assistant to respond to user messages.
+> A valid key from **Google AI Studio** is required for the Chatbot, Agentic Sandbox, and Resume Tailoring APIs to respond to request calls.
 
 ### 3. Installation
 Install the project dependencies:
@@ -65,24 +84,38 @@ npm run build
 ```text
 ├── components/
 │   ├── ai/
-│   │   └── ChatbotWidget.tsx   # Floating AI Chatbot UI
-│   ├── PageLoader.tsx         # Full-screen entry splash loader
-│   ├── Navbar.tsx             # Responsive navigation with MGA branding
-│   ├── HomeSection.tsx        # Hero section with stats & resume download
+│   │   └── ChatbotWidget.tsx   # Floating AI Chatbot Assistant UI
 │   ├── AboutSection.tsx       # Profile description & bio details
-│   ├── SkillSection.tsx       # Tech stack category grids with micro-hover actions
+│   ├── AgentSection.tsx       # Multi-agent tracer sandbox with SVG state topology
 │   ├── CerticationSection.tsx # Certifications, badges, and verification links
-│   ├── ProjectsSection.tsx    # Expandable projects card grid & View All toggle
-│   └── ContactSection.tsx     # Message contact form
+│   ├── ContactSection.tsx     # Message contact form (wired with MongoDB fallback)
+│   ├── FooterSection.tsx      # Monogrammed footer with quick social access
+│   ├── HomeSection.tsx        # Hero section with stats, CV, & AI resume tailor modal
+│   ├── InspiringSection.tsx   # Interactive Quote Generator & carousel
+│   ├── Navbar.tsx             # Responsive navigation with scroll spy & brand logo
+│   ├── PageLoader.tsx         # Full-screen entry splash loader
+│   ├── ProjectsSection.tsx    # Accordion-expandable projects grid
+│   ├── SkillSection.tsx       # Categories & tech stacks with hover perspective effects
+│   └── ThemeSwitcher.tsx      # Dark/Light theme toggle
 ├── pages/
 │   ├── api/
+│   │   ├── agent/
+│   │   │   └── run.ts          # SSE multi-agent orchestrator stream
 │   │   ├── ai/
-│   │   │   └── chat.ts        # Gemini API orchestration & history proxy endpoint
+│   │   │   ├── chat.ts         # Chatbot response handler with failover model
+│   │   │   └── quote.ts        # Dynamic Gemini quote generator
+│   │   ├── tailor/
+│   │   │   ├── analyze.ts      # Semantic alignment analysis for JD matching
+│   │   │   └── generate-pdf.ts # Dynamic PDFKit compiler for tailored resumes
 │   │   └── contact.ts         # User contact message handler
 │   ├── _app.tsx               # App entry wrapping ThemeProvider & PageLoader
-│   └── index.tsx              # Main landing page builder
+│   ├── index.tsx              # Main portfolio builder page
+│   └── fonts/                 # Custom local fonts
 ├── public/
-│   ├── Image/
-│   │   └── logo.png           # Creative generated MGA monogram logo
-│   └── resume.pdf             # Latest professional resume document
+│   ├── Image/                 # Assets (monogram logos, quote avatars, badges)
+│   ├── favicon.ico
+│   └── resume.pdf             # Master PDF resume file
+└── styles/
+    ├── globals.css            # Base stylesheet, layout grid patterns, and keyframes
+    └── Home.module.css
 ```
